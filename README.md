@@ -72,7 +72,7 @@ curl -X POST "http://127.0.0.1:8000/reservations" \
   -d '{
     "user_id": "<user_id>",
     "number_of_guests": 4,
-    "location": "front",
+    "occasion": "Birthday",
     "reservation_date": "2026-07-01",
     "reservation_time": "09:00:00"
   }'
@@ -94,7 +94,7 @@ curl -X POST "http://127.0.0.1:8000/reservations" \
   -d '{
     "user_id": "<user_id>",
     "number_of_guests": 4,
-    "location": "front",
+    "occasion": "Birthday",
     "reservation_date": "2026-07-01",
     "reservation_time": "09:00:00"
   }'

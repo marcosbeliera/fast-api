@@ -1,4 +1,5 @@
 from datetime import date, datetime, time
+from enum import Enum
 from pathlib import Path
 from typing import Annotated
 from uuid import uuid4
@@ -17,6 +18,14 @@ router = APIRouter(
 )
 
 
+class Occasion(str, Enum):
+    ANNIVERSARY = "Anniversary"
+    BIRTHDAY = "Birthday"
+    DATE_NIGHT = "Date Night"
+    FAMILY_DINNER = "Family Dinner"
+    OTHER = "Other"
+
+
 # Reservation data model (matches reservation_data.csv)
 class Reservation(BaseModel):
     # validate_assignment so setattr() in PATCH re-runs field validators
@@ -25,7 +34,7 @@ class Reservation(BaseModel):
     id: UUID4 = Field(default_factory=uuid4)
     user_id: UUID4
     number_of_guests: int = Field(ge=1)
-    location: str
+    occasion: Occasion
     reservation_date: Annotated[date, AfterValidator(check_future_date)]
     reservation_time: time
     created_at: datetime = Field(default_factory=datetime.now)
@@ -34,7 +43,7 @@ class Reservation(BaseModel):
 class ReservationUpdate(BaseModel):
     user_id: UUID4 | None = None
     number_of_guests: int | None = Field(default=None, ge=1)
-    location: str | None = None
+    occasion: Occasion | None = None
     reservation_date: Annotated[date | None, AfterValidator(check_future_date)] = None
     reservation_time: time | None = None
 
@@ -185,7 +194,7 @@ async def update_reservation(id: UUID4, update_data: ReservationUpdate):
 
     Requirements:
     - The reservation ID must exist.
-    - Allows partial updates for: user_id, number_of_guests, location, reservation_date, reservation_time.
+    - Allows partial updates for: user_id, number_of_guests, occasion, reservation_date, reservation_time.
     """
 
     current_res = next((r for r in reservation_list if r.id == id), None)

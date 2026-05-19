@@ -36,7 +36,7 @@ def load_reservations_from_csv(csv_path: Path, Reservation: Type) -> list:
                 id=row["id"],
                 user_id=row["user_id"],
                 number_of_guests=int(row["number_of_guests"]),
-                location=row["location"],
+                occasion=row["occasion"],
                 reservation_date=row["reservation_date"],
                 reservation_time=row["reservation_time"],
                 created_at=row["created_at"],
