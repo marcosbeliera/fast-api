@@ -1,4 +1,4 @@
-#!/Users/mbeliera/Documents/projects/fast-api/fastapi-telus-training2/.venv/bin/python3.12
+#!/Users/mbeliera/Documents/projects/fast-api/fastapi-training/.venv/bin/python3.12
 import sys
 from numpy.f2py.f2py2e import main
 if __name__ == '__main__':
